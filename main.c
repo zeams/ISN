@@ -6,7 +6,7 @@ int main()
 	#if JOYSTICK	//si JOYSTICK !=0, alors on initialise les broches
 		initPin();
 	#endif
-	pause();	//fonction qui contient le jeu
+	pause();	
 	SDL_Quit();
 	return EXIT_SUCCESS;
 }

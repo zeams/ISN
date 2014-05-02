@@ -1,5 +1,4 @@
 #include"affichage.h"
-
 static SDL_Surface *ecran=NULL;
 int initAffichage(void)
 {	
@@ -32,7 +31,7 @@ void afficherBalle(balle * tab[])
 void affichageEx(SDL_Rect *position)
 {
 	SDL_Rect pR=*position;
-	SDL_Surface *surface=SDL_LoadBMP("exp.bmp");
+	SDL_Surface *surface=SDL_LoadBMP("images/exp.bmp");
 	pR.x-=surface->w/2;
 	pR.y-=surface->h/2;
 	SDL_SetColorKey(surface, SDL_SRCCOLORKEY, SDL_MapRGB(surface->format, 255,255, 255));

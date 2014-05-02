@@ -73,23 +73,23 @@ int collision(balle *tab[],player *j1, player *j2)
 			if(tab[i]->deplacement==-1 && testCollision(tab[i]->position,j2->rectangle))
 			{
 					SDL_FreeSurface(tab[i]->pointeur);
-					tab[i]->pointeur=SDL_LoadBMP("explosion.bmp");
+					tab[i]->pointeur=SDL_LoadBMP("images/explosion.bmp");
 					tab[i]->position.x-=j2->rectangle.w/2;
 					tab[i]->position.y-=j2->rectangle.h/2;
 					SDL_SetColorKey(tab[i]->pointeur, SDL_SRCCOLORKEY, SDL_MapRGB(tab[i]->pointeur->format, 255,255, 255));
 					SDL_FreeSurface(j2->surface);
-					j2->surface=SDL_LoadBMP("tank1br.bmp");
+					j2->surface=SDL_LoadBMP("images/tank1br.bmp");
 					a=2;
 			}
 			else if(tab[i]->deplacement==1 && testCollision(tab[i]->position,j1->rectangle))
 			{
 				SDL_FreeSurface(tab[i]->pointeur);
-				tab[i]->pointeur=SDL_LoadBMP("explosion.bmp");
+				tab[i]->pointeur=SDL_LoadBMP("images/explosion.bmp");
 				tab[i]->position.x-=j2->rectangle.w/2;
 				tab[i]->position.y-=j2->rectangle.h/2;
 				SDL_SetColorKey(tab[i]->pointeur, SDL_SRCCOLORKEY, SDL_MapRGB(tab[i]->pointeur->format, 255,255, 255));
 				SDL_FreeSurface(j1->surface);
-				j1->surface=SDL_LoadBMP("tank2br.bmp");
+				j1->surface=SDL_LoadBMP("images/tank2br.bmp");
 				a=1;
 			}
 		}
@@ -112,16 +112,16 @@ SDL_Surface* imageBalle(Type type, int direction)
 	switch(type)
 	{
 		case NORMAL:
-			surface=SDL_LoadBMP("balle.bmp");
+			surface=SDL_LoadBMP("images/balle.bmp");
 			break;
 		case CHERCHE:
 			if(direction==1)
 			{
-				surface=SDL_LoadBMP("missileR.bmp");
+				surface=SDL_LoadBMP("images/missileR.bmp");
 			}
 			else if(direction==-1)
 			{
-				surface=SDL_LoadBMP("missileL.bmp");
+				surface=SDL_LoadBMP("images/missileL.bmp");
 			}
 			break;
 	}

@@ -5,8 +5,8 @@ void pause(void)
 	bool continuer=1;
 	SDL_Event event;
 	//on crée deux structures joueurs qui contiennent les données associées aux joueurs à savoir la structure {x,y,largeur,hauteur} qu'on ne peut pas encore remplir, puis la sous-variable *surface qui vaut l'adresse de la surface qu'on charge avec SDL_LoadBMP
-	player joueur2={{MARGE,0,0,0},SDL_LoadBMP("tank1.bmp"),0,NORMAL};
-	player joueur1={{0,0,0,0},SDL_LoadBMP("tank2.bmp"),0,NORMAL};	  
+	player joueur2={{MARGE,0,0,0},SDL_LoadBMP("images/tank1.bmp"),0,NORMAL};
+	player joueur1={{0,0,0,0},SDL_LoadBMP("images/tank2.bmp"),0,NORMAL};	  
 	//on remplie la sous structure rectangle de chaque joueur avec les bonnes valeurs
 	joueur2.rectangle.w=joueur2.surface->w;		
 	joueur2.rectangle.h=joueur2.surface->h;
