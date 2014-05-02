@@ -62,16 +62,40 @@ void deplacementBalle(balle *tab[],player joueur1,player joueur2)
 		}
 	}
 }
-char testCollision(SDL_Rect rectangle1, SDL_Rect rectangle2)
+int collision(balle *tab[],player *j1, player *j2)
 {
-	char a=1;
-	if((rectangle1.x+rectangle1.w<rectangle2.x)||(rectangle1.x>rectangle2.x+rectangle2.w)||(rectangle1.y>rectangle2.y+rectangle2.h)||(rectangle1.y+rectangle1.h<rectangle2.y))
+	int i;
+	int a=0;
+	for(i=0;i<100;i++)
 	{
-		a=0;
+		if(tab[i]!=NULL)
+		{
+			if(tab[i]->deplacement==-1 && testCollision(tab[i]->position,j2->rectangle))
+			{
+					SDL_FreeSurface(tab[i]->pointeur);
+					tab[i]->pointeur=SDL_LoadBMP("explosion.bmp");
+					tab[i]->position.x-=j2->rectangle.w/2;
+					tab[i]->position.y-=j2->rectangle.h/2;
+					SDL_SetColorKey(tab[i]->pointeur, SDL_SRCCOLORKEY, SDL_MapRGB(tab[i]->pointeur->format, 255,255, 255));
+					SDL_FreeSurface(j2->surface);
+					j2->surface=SDL_LoadBMP("tank1br.bmp");
+					a=2;
+			}
+			else if(tab[i]->deplacement==1 && testCollision(tab[i]->position,j1->rectangle))
+			{
+				SDL_FreeSurface(tab[i]->pointeur);
+				tab[i]->pointeur=SDL_LoadBMP("explosion.bmp");
+				tab[i]->position.x-=j2->rectangle.w/2;
+				tab[i]->position.y-=j2->rectangle.h/2;
+				SDL_SetColorKey(tab[i]->pointeur, SDL_SRCCOLORKEY, SDL_MapRGB(tab[i]->pointeur->format, 255,255, 255));
+				SDL_FreeSurface(j1->surface);
+				j1->surface=SDL_LoadBMP("tank2br.bmp");
+				a=1;
+			}
+		}
 	}
 	return a;
 }
-
 void detruireBalle(balle *tab[],int rang)
 {
 	if(tab[rang]!=NULL)
@@ -102,6 +126,43 @@ SDL_Surface* imageBalle(Type type, int direction)
 			break;
 	}
 	return surface;
+}
+
+int collisionBalle(balle *tab[],int i)
+{
+	int j,a=0;
+	SDL_Rect position;
+	for(j=0;j<100;j++)
+	{
+		if(tab[j]!=NULL)
+		{
+			if((testCollision(tab[j]->position,tab[i]->position))&&i!=j)
+			{
+				position.x=(tab[i]->position.x+tab[i]->pointeur->w/2+tab[j]->position.x+tab[j]->pointeur->w/2)/2;
+				position.y=(tab[i]->position.y+tab[i]->pointeur->h/2+tab[j]->position.y+tab[j]->pointeur->h/2)/2;
+				detruireBalle(tab,j);
+				detruireBalle(tab,i);
+				a=1;
+				affichageEx(&position);
+				SDL_Delay(10);
+				break;
+			}
+		}
+	}
+	return a;
+}
+void freeTab(balle *tab[])
+{
+	int i;
+	for(i=0;i<100;i++)
+	{
+		if(tab[i]!=NULL)
+		{
+			SDL_FreeSurface(tab[i]->pointeur);
+			free(tab[i]);
+			tab[i]=NULL;
+		}
+	}
 }
 
 int rechercheVide(balle *tab[])
