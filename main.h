@@ -54,7 +54,5 @@
 	#include"pi.h"
 	#include"jeu.h"
 	#include<stdbool.h>
-	
-
 #endif
 
